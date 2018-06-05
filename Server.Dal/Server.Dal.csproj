@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Server.Models\Server.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ionix.Data">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Data.PostgreSql">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Data.PostgreSql.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Data.PostgreSql.BulkCopy">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Data.PostgreSql.BulkCopy.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Migration">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Migration.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Migration.PostgreSql">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Migration.PostgreSql.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Utils">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

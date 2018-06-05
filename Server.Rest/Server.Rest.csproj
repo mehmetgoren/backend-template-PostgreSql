@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="assets\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Folder>
+    <Folder Include="assets\jsons\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.0.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Server.Dal\Server.Dal.csproj" />
+    <ProjectReference Include="..\Server.Models\Server.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ionix.Data">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Data.PostgreSql">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Data.PostgreSql.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Migration">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Migration.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Migration.PostgreSql">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Migration.PostgreSql.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Rest">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="ionix.Utils">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLog">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\SQLog.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
