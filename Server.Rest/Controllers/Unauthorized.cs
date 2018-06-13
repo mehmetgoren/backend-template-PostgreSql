@@ -11,7 +11,7 @@
     using Server.Dal;
 
     //Bu Controller Authorize Olmuyor.
-    public class UnauthorizedController : ApiControllerBase
+    public class UnauthorizedController : ApiController
     {
 
         public UnauthorizedController(Lazy<DbContext> db)

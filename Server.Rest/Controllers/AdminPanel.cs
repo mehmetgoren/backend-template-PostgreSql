@@ -14,7 +14,7 @@
 
     //i believe service layer should be thin as mush as posible. Therefore i implement this controller as a proxy.
     [TokenTableAuth]
-    public partial class AdminPanelController : ApiControllerBase
+    public partial class AdminPanelController : ApiController
     {
         public AdminPanelController(Lazy<DbContext> db)
             : base(db) { }

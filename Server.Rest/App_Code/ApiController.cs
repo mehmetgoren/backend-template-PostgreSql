@@ -6,14 +6,16 @@
     using System.Collections.Generic;
     using ionix.Data;
 
-    public abstract class ApiControllerBase : Controller
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    public abstract class ApiController : ControllerBase, IDisposable
     {
         //private readonly Lazy<DbContext> _dbContext = new Lazy<DbContext>(ionixFactory.CreateDbContext, true);//Bunu dependency' ye geçir.
         //public DbContext Db => this._dbContext.Value;
 
         private readonly Lazy<DbContext> _dbContext;
         protected DbContext Db => this._dbContext.Value;
-        protected ApiControllerBase(Lazy<DbContext> dbContext)
+        protected ApiController(Lazy<DbContext> dbContext)
         {
             this._dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
@@ -34,18 +36,13 @@
             return ionixFactory.CreateTransactionalDbContext();
         }
 
-        //DI handles this.
-        protected override void Dispose(bool disposing)
+        public void Dispose()
         {
-            if (disposing)
-            {
-                if (this._dbContext.IsValueCreated)
-                    this._dbContext.Value.Dispose();
-            }
-            base.Dispose(disposing);
+            if (this._dbContext.IsValueCreated)
+                this._dbContext.Value.Dispose();
         }
 
-        public override JsonResult Json(object data)
+        public JsonResult Json(object data)
         {
             return new DefaultJsonResult(data);
         }

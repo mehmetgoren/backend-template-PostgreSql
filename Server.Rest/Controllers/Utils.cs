@@ -11,7 +11,7 @@
     using Server.Dal;
 
     [TokenTableAuth]
-    public class UtilsController : ApiControllerBase
+    public class UtilsController : ApiController
     {
         public UtilsController(Lazy<DbContext> db)
             : base(db) { }

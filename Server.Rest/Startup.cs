@@ -69,11 +69,12 @@
                     .AllowCredentials();
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "api/{controller}/{action}/{id?}");
-            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "api/{controller}/{action}/{id?}");
+            //});
 
+            app.UseMvc();
 
             //signalr
             app.UseSignalR(routes =>
