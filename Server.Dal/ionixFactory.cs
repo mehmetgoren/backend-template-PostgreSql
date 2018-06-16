@@ -68,6 +68,8 @@
                 new MigrationInitializer(null).Execute(
                     AppDomain.CurrentDomain.GetAssemblies().First(p => p.FullName.StartsWith("Server.Models")),
                     client.Cmd, false);
+
+                client.Commit();
             }
         }
 
