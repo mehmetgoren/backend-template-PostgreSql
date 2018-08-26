@@ -45,7 +45,7 @@
                             {
                                 SQLog.Logger.Create(stackTrace)
                                     .Code(313)
-                                    .Message($"Unsuccessful login attempt. UserNname: '{credentials.Username}'. Password: '{credentials.Password}'").SaveAsync();
+                                    .Info($"Unsuccessful login attempt. UserNname: '{credentials.Username}'. Password: '{credentials.Password}'").SaveAsync();
                             }
                         }
                 }
@@ -53,14 +53,14 @@
                 {
                     SQLog.Logger.Create(stackTrace)
                         .Code(313)
-                        .Message($"Successful Login: '{credentials?.Username}. Password: '{credentials?.Password}'") //.Object(ret.Kisi)
+                        .Info($"Successful Login: '{credentials?.Username}. Password: '{credentials?.Password}'") //.Object(ret.Kisi)
                         .SaveAsync();
                 }
                 else
                 {
                     SQLog.Logger.Create(stackTrace)
                         .Code(313)
-                        .Message($"Unsuccessful Login: '{credentials?.Username}.") //.Object(ret.Kisi)
+                        .Info($"Unsuccessful Login: '{credentials?.Username}.") //.Object(ret.Kisi)
                         .SaveAsync();
                 }
                 return ret;

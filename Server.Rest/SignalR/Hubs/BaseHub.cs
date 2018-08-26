@@ -77,7 +77,7 @@
 
                 SQLog.Logger.Create(stOnConnected)
                     .Code(1010)
-                    .Message($"Client (ClientId: {this.Context.ConnectionId}) was connected to Hub ({this.GetType()}:").SaveAsync();
+                    .Info($"Client (ClientId: {this.Context.ConnectionId}) was connected to Hub ({this.GetType()}:").SaveAsync();
             }
             return base.OnConnectedAsync();
         }
@@ -97,7 +97,7 @@
 
                 SQLog.Logger.Create(stOnDisconnected)
                     .Code(1010)
-                    .Message(
+                    .Info(
                         $"Client (ClientId: {this.Context.ConnectionId}) was disconnected to Hub ({this.GetType()}:")
                     .SaveAsync();
             }

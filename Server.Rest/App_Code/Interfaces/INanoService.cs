@@ -34,7 +34,7 @@
             }
             catch (Exception ex)
             {
-                SQLog.Logger.Create(new StackTrace()).OnException(ex).SaveAsync();
+                SQLog.Logger.Create(new StackTrace()).Error(ex).SaveAsync();
 
                 this.IsRunning = false;
             }

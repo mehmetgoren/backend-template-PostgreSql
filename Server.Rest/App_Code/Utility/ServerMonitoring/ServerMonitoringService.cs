@@ -53,7 +53,7 @@
                 }
                 catch (Exception ex)
                 {
-                    SQLog.Logger.Create(new StackTrace()).Code(8541).OnException(ex).SaveAsync();
+                    SQLog.Logger.Create(new StackTrace()).Code(8541).Error(ex).SaveAsync();
                 }
             }
         }
