@@ -20,13 +20,13 @@
             : base(db) { }
 
         [HttpGet]
-        public Result<Role> GetRoles()
+        public IActionResult GetRoles()
         {
             return this.ResultList(this.Db.Role.Select);
         }
 
         [HttpGet]
-        public Result<Role> GetRolesNoAdmin()
+        public IActionResult GetRolesNoAdmin()
         {
             return this.ResultList(this.Db.Role.SelectAdminsOnly);
         }
@@ -50,7 +50,7 @@
             return this.ResultSingle(() => this.Db.Role.Delete(new Role {RoleId = roleId} ));
         }
 
-        public Result<V_Menu> GetMenus()
+        public IActionResult GetMenus()
         {
             return this.ResultList(this.Db.GetV_MenuList);
         }
@@ -79,7 +79,7 @@
         }
 
         [HttpGet]
-        public Result<Menu> CreateMenu(Guid token)
+        public IActionResult CreateMenu(Guid token)
         {
             return this.ResultList(() =>
             {
@@ -134,13 +134,13 @@
 
 
         [HttpGet]
-        public Result<V_RoleMenu> GetRoleMenuList(int roleId)
+        public IActionResult GetRoleMenuList(int roleId)
         {
             return this.ResultList(() => this.Db.GetV_RoleMenuList(roleId));
         }
 
         [HttpPost]
-        public Result<int> SaveRoleMenu([FromBody] ApiParameter ap)
+        public IActionResult SaveRoleMenu([FromBody] ApiParameter ap)
         {
             return this.ResultSingle(() =>
             {

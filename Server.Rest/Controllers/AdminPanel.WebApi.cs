@@ -12,7 +12,7 @@
     partial class AdminPanelController
     {
         [HttpGet]//Reflected Kısımdan veriler. Yani Assembly ile olanlar.
-        public Result<TreeNode> GetApiActionsHierarchical(string role)
+        public IActionResult GetApiActionsHierarchical(string role)
         {
             return this.ResultList(() => GetApiActionsHierarchical_Internal(role));
         }
@@ -55,7 +55,7 @@
 
 
         [HttpPost]//Reflection verileri ile oluşan ekrandan db aktarılacak veriler.
-        public Result<int> SaveActionRoles([FromBody]SaveRoleActionsModel par)
+        public IActionResult SaveActionRoles([FromBody]SaveRoleActionsModel par)
         {
             return this.ResultSingle(() =>
             {
@@ -88,7 +88,7 @@
         }
 
         [HttpPost]
-        public Result<int> ClearUnusedRoleActions()
+        public IActionResult ClearUnusedRoleActions()
         {
             return this.ResultSingle(() => ClearUnusedRoleActions(SqlRoleStorageProvider.Instance, AuthorizationValidator.Instance));
         }

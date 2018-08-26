@@ -18,7 +18,7 @@
             : base(db) { }
 
         [HttpPost]
-        public Result<UserLocal> Login([FromBody] Credentials credentials)
+        public IActionResult Login([FromBody] Credentials credentials)
         {
             return this.ResultSingle(() =>
             {

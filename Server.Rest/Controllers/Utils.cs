@@ -18,27 +18,21 @@
 
         //Örneğin İki Tarih Arası İStenirse bunu bir attribute ile meta dataya göm ve sayı tarih vb tüm alanlar için Kullan.
         [HttpPost]
-        public Result<object> Search([FromBody] SearchParams searchParams)
+        public IActionResult Search([FromBody] SearchParams searchParams)
         {
+            SearchResult result = default(SearchResult);
             return this.ResultList(() =>
             {
-                var r = new SearchCriteriaResolver().Search(searchParams);
-                Datas<object> ret = new Datas<object>();
-                ret.EntityList = r.EntityList;
-                ret.Total = r.Total;
-
-                return ret;
-            });
+                result = new SearchCriteriaResolver().Search(searchParams);
+                return result.EntityList;
+            }, result.Total);
         }
 
 
         [HttpPost]
         public IActionResult GetMetaData([FromBody] HashSet<string> typeFullNameList)
         {
-            return this.ResultList(() =>
-            {
-                return Metadata.Get(typeFullNameList);
-            });
+            return this.ResultList(() => Metadata.Get(typeFullNameList));
         }
 
 
