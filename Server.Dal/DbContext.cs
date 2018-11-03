@@ -1,11 +1,9 @@
 ﻿namespace Server.Dal
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using ionix.Data;
     using ionix.Utils.Extensions;
-    using Models;
 
     //Ayrıca DB.Default u da buradan yönetebilirsin
     public class DbContext : IDisposable
@@ -60,20 +58,10 @@
         private readonly Lazy<RoleRepository> _role;
         public RoleRepository Role => this._role.Value;
 
-        public IEnumerable<V_RoleMenu> GetV_RoleMenuList(int roleId)
-        {
-            return ionixFactory.CreateCommand(this.DbAccess).Query<V_RoleMenu>(V_RoleMenu.Query(roleId));
-        }
-
-        public IEnumerable<V_Menu> GetV_MenuList()
-        {
-            return ionixFactory.CreateCommand(this.DbAccess).Query<V_Menu>(V_Menu.Query());
-        }
-
 
         public virtual void Dispose()
         {
-            this?.DbAccess.Dispose();
+            this.DbAccess?.Dispose();
         }
     }
 

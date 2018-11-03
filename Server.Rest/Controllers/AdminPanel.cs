@@ -52,7 +52,7 @@
 
         public IActionResult GetMenus()
         {
-            return this.ResultList(this.Db.GetV_MenuList);
+            return this.ResultList(this.Db.Menu.GetV_MenuList);
         }
 
         [HttpPost]
@@ -136,7 +136,7 @@
         [HttpGet]
         public IActionResult GetRoleMenuList(int roleId)
         {
-            return this.ResultList(() => this.Db.GetV_RoleMenuList(roleId));
+            return this.ResultList(() => this.Db.RoleMenu.GetV_RoleMenuList(roleId));
         }
 
         [HttpPost]
