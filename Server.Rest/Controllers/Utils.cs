@@ -91,7 +91,7 @@
                 {
                     foreach (User user in users)
                     {
-                        V_AppUser entity = this.Db.AppUser.QueryViewBy(user.Name);
+                        V_AppUser entity = this.Db.AppUsers.QueryViewBy(user.Name);
 
                         if (null != entity)
                         {

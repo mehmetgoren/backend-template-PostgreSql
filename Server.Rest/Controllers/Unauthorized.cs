@@ -27,7 +27,7 @@
                 if (null != credentials && !String.IsNullOrEmpty(credentials.Username) && !String.IsNullOrEmpty(credentials.Password))
                 {
                         //AppUser Tablosunda Var mı?
-                        AppUser appUser = this.Db.AppUser.QuerySingle("select * from app_user a where lower(a.user_name)=:0".ToQuery(credentials.Username.ToLower()));
+                        AppUser appUser = this.Db.AppUsers.QuerySingle("select * from app_user a where lower(a.user_name)=:0".ToQuery(credentials.Username.ToLower()));
                         if (null != appUser)
                         {
                             if (credentials.Password.ToLower() == appUser.Password?.ToLower())
@@ -39,7 +39,7 @@
                                 if (appUser.LoginCount == null)
                                     appUser.LoginCount = 0L;
                                 appUser.LoginCount++;
-                                this.Db.AppUser.Update(appUser, p => p.LoginCount);
+                                this.Db.AppUsers.Update(appUser, p => p.LoginCount);
                             }
                             else
                             {
@@ -76,14 +76,14 @@
         [HttpGet]
         public IActionResult GetAppSettingList()
         {
-            var ret = this.Db.AppSetting.Select();
+            var ret = this.Db.AppSettings.Select();
             return Json(ret);
         }
 
         [HttpGet]
         public IActionResult Test()
         {
-            var list = this.Db.Menu.Select().ToList();
+            var list = this.Db.Menus.Select().ToList();
 
 
             var ret = MakeTree(list);

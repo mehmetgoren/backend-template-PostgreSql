@@ -14,14 +14,14 @@
         {
             this.DbAccess = dbAccess ?? throw new ArgumentNullException(nameof(dbAccess));
 
-            this._action = new Lazy<ActionRepository>(() => ionixFactory.CreateRepository<ActionRepository>(this.DbAccess), true);
-            this._appSetting = new Lazy<AppSettingRepository>(() => ionixFactory.CreateRepository<AppSettingRepository>(this.DbAccess), true);
-            this._appUser = new Lazy<AppUserRepository>(() => ionixFactory.CreateRepository<AppUserRepository>(this.DbAccess), true);
-            this._controller = new Lazy<ControllerRepository>(() => ionixFactory.CreateRepository<ControllerRepository>(this.DbAccess), true);
-            this._menu = new Lazy<MenuRepository>(() => ionixFactory.CreateRepository<MenuRepository>(this.DbAccess), true);
-            this._roleAction = new Lazy<RoleActionRepository>(() => ionixFactory.CreateRepository<RoleActionRepository>(this.DbAccess), true);
-            this._roleMenu = new Lazy<RoleMenuRepository>(() => ionixFactory.CreateRepository<RoleMenuRepository>(this.DbAccess), true);
-            this._role = new Lazy<RoleRepository>(() => ionixFactory.CreateRepository<RoleRepository>(this.DbAccess), true);
+            this._actions = new Lazy<ActionRepository>(() => ionixFactory.CreateRepository<ActionRepository>(this.DbAccess), true);
+            this._appSettings = new Lazy<AppSettingRepository>(() => ionixFactory.CreateRepository<AppSettingRepository>(this.DbAccess), true);
+            this._appUsers = new Lazy<AppUserRepository>(() => ionixFactory.CreateRepository<AppUserRepository>(this.DbAccess), true);
+            this._controllers = new Lazy<ControllerRepository>(() => ionixFactory.CreateRepository<ControllerRepository>(this.DbAccess), true);
+            this._menus = new Lazy<MenuRepository>(() => ionixFactory.CreateRepository<MenuRepository>(this.DbAccess), true);
+            this._roleActions = new Lazy<RoleActionRepository>(() => ionixFactory.CreateRepository<RoleActionRepository>(this.DbAccess), true);
+            this._roleMenus = new Lazy<RoleMenuRepository>(() => ionixFactory.CreateRepository<RoleMenuRepository>(this.DbAccess), true);
+            this._roles = new Lazy<RoleRepository>(() => ionixFactory.CreateRepository<RoleRepository>(this.DbAccess), true);
         }
 
         public int ExecuteNonQuery(string sql, params object[] pars)
@@ -34,29 +34,29 @@
             return this.DbAccess.ExecuteNonQuery(sql.ToQuery());
         }
 
-        private readonly Lazy<ActionRepository> _action;
-        public ActionRepository Action => this._action.Value;
+        private readonly Lazy<ActionRepository> _actions;
+        public ActionRepository Actions => this._actions.Value;
 
-        private readonly Lazy<AppSettingRepository> _appSetting;
-        public AppSettingRepository AppSetting => this._appSetting.Value;
+        private readonly Lazy<AppSettingRepository> _appSettings;
+        public AppSettingRepository AppSettings => this._appSettings.Value;
 
-        private readonly Lazy<AppUserRepository> _appUser;
-        public AppUserRepository AppUser => this._appUser.Value;
+        private readonly Lazy<AppUserRepository> _appUsers;
+        public AppUserRepository AppUsers => this._appUsers.Value;
 
-        private readonly Lazy<ControllerRepository> _controller;
-        public ControllerRepository Controller => this._controller.Value;
+        private readonly Lazy<ControllerRepository> _controllers;
+        public ControllerRepository Controllers => this._controllers.Value;
 
-        private readonly Lazy<MenuRepository> _menu;
-        public MenuRepository Menu => this._menu.Value;
+        private readonly Lazy<MenuRepository> _menus;
+        public MenuRepository Menus => this._menus.Value;
 
-        private readonly Lazy<RoleActionRepository> _roleAction;
-        public RoleActionRepository RoleAction => this._roleAction.Value;
+        private readonly Lazy<RoleActionRepository> _roleActions;
+        public RoleActionRepository RoleActions => this._roleActions.Value;
 
-        private readonly Lazy<RoleMenuRepository> _roleMenu;
-        public RoleMenuRepository RoleMenu => this._roleMenu.Value;
+        private readonly Lazy<RoleMenuRepository> _roleMenus;
+        public RoleMenuRepository RoleMenus => this._roleMenus.Value;
 
-        private readonly Lazy<RoleRepository> _role;
-        public RoleRepository Role => this._role.Value;
+        private readonly Lazy<RoleRepository> _roles;
+        public RoleRepository Roles => this._roles.Value;
 
 
         public virtual void Dispose()
