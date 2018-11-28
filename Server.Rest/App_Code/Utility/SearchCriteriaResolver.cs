@@ -216,6 +216,14 @@
             bool pagingEnabled = take.HasValue && page.HasValue;
             if (pagingEnabled) //Yani Sayfalama var ise ???....
             {
+                //postgres de kolon isimleri karışıklığı için eklendi. Çünkü js de 
+                //Ayrıca Sql Injection' dan da koruma sağlıyor.
+                if (null != sort)
+                {
+                    sort = PostgresSnakeCaseDoctor.FixSortFieldName(metaData, sort);
+                }
+                //
+
                 if (sort.IsEmptyList())
                 {
                     PropertyMetaData pm = metaData.Properties.FirstOrDefault((p) => p.Schema.IsKey);
@@ -226,10 +234,6 @@
 
                     sort = new[] { new SearchSortRequest { field = pm.Schema.ColumnName, dir = 0 } };
                 }
-
-                //postgres de kolon isimleri karışıklığı için eklendi. Çünkü js de 
-                PostgresSnakeCaseDoctor.FixSortFieldName(metaData, sort);
-                //
 
                 query = query.ToPagingQuery(sort.First(), page.Value, take.Value);
             }
@@ -247,7 +251,7 @@
                     ret.Total = c.Cmd.QuerySingle<int>(countQuery);
                 }
             }
-
+            //System.Threading.Thread.Sleep(1000);
             return ret;
         }
     }

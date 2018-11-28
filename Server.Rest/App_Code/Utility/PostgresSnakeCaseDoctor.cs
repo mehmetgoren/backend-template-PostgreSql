@@ -1,28 +1,33 @@
 ﻿namespace Server.Rest.App_Code
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ionix.Data;
     using Models;
 
     public static class PostgresSnakeCaseDoctor
     {
-        public static void FixSortFieldName(IEntityMetaData metaData , SearchSortRequest[] sort)
+        public static SearchSortRequest[] FixSortFieldName(IEntityMetaData metaData , SearchSortRequest[] sort)
         {
+            List<SearchSortRequest> ret = new List<SearchSortRequest>();
             foreach (var sortField in sort)
             {
-                var md = metaData[sortField.field];
-                if (null == md)
+                if (!String.IsNullOrEmpty(sortField.field))
                 {
-                    md = metaData.Properties.FirstOrDefault(p => p.Property.Name == sortField.field);
-                    if (null != md)
-                        sortField.field = md.Schema.ColumnName;
+                    var md = metaData[sortField.field];
+                    if (null == md)
+                    {
+                        md = metaData.Properties.FirstOrDefault(p => p.Property.Name == sortField.field);
+                        if (null != md)
+                        {
+                            sortField.field = md.Schema.ColumnName;
+                            ret.Add(sortField);
+                        }                        
+                    }
                 }
             }
+            return ret.ToArray();
         }
-
-    //    public static void SetFieldName(PropertyMetaData metaData, Field field)
-    //    {
-    //        field.ColumnName = metaData.Property.Name;
-    //    }
     }
 }

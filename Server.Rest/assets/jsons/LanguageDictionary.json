@@ -1,6 +1,26 @@
 ﻿{
-  "hello_world": {
-    "en": "Hello World",
-    "tr": "Merhaba Dünya"
+  "save": {
+    "en": "Save",
+    "tr": "Kaydet"
+  },
+  "reset": {
+    "en": "Reset",
+    "tr": "Reset"
+  },
+  "delete": {
+    "en": "Delete",
+    "tr": "Sil"
+  },
+  "close": {
+    "en": "Close",
+    "tr": "Kapat"
+  },
+  "closeOthers": {
+    "en": "Close Others",
+    "tr": "Diğerlerini Kapat"
+  },
+  "closeAll": {
+    "en": "Close All",
+    "tr": "Hepsini Kapat"
   }
 }

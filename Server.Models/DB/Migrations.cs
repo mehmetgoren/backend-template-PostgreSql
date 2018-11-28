@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public sealed class Migration100 : MigrationAutoGen
+    public sealed class Migration100 : MigrationCreateTable
     {
         public const string VersionNo = "1.0.0";
 
@@ -15,10 +15,7 @@
         {
         }
 
-        protected override IEnumerable<Type> GetMigrationTypes()
-        {
-            return Assembly.GetExecutingAssembly().GetTypes();
-        }
+        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
     }
 
     public sealed class Migration101 : Migration

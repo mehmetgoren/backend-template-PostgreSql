@@ -25,7 +25,7 @@
             {
                 result = new SearchCriteriaResolver().Search(searchParams);
                 return result.EntityList;
-            }, result.Total);
+            }, () => result.Total);
         }
 
 
@@ -104,6 +104,10 @@
             });
         }
 
-        //
+        [HttpGet]
+        public IActionResult GetLanguageDictionary()
+        {
+            return this.ResultSingle(() => DataSources.Jsons.LanguageDictionary);
+        }
     }
 }
