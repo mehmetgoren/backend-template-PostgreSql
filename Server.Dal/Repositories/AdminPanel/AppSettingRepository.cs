@@ -2,19 +2,16 @@
 {
     using ionix.Data;
     using Models;
+    using System.Threading.Tasks;
 
-    public class AppSettingRepository : Repository<AppSetting>
+    internal class AppSettingRepository : Repository<AppSetting>
     {
-        public AppSettingRepository(ICommandAdapter cmd)
+        internal AppSettingRepository(ICommandAdapter cmd)
             : base(cmd)
         {
             
         }
 
-        public int DeleteAll()
-        {
-            return this.DataAccess.ExecuteNonQuery("delete from app_setting".ToQuery());
-        }
-
+        public Task<int> DeleteAll() => this.DataAccess.ExecuteNonQueryAsync("delete from app_setting".ToQuery());
     }
 }

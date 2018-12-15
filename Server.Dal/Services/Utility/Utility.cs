@@ -1,13 +1,11 @@
-﻿namespace Server.Rest
+﻿namespace Server.Dal
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq.Expressions;
     using ionix.Data;
     using ionix.Utils;
     using ionix.Utils.Extensions;
     using System.Threading;
-    using Dal;
     using Models;
     using Newtonsoft.Json.Linq;
 

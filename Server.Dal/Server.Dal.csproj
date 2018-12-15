@@ -31,6 +31,9 @@
     <Reference Include="ionix.Utils">
       <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\ionix.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="SQLog">
+      <HintPath>..\..\..\..\..\ionix.Core\builds\netstandard2.0\SQLog.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

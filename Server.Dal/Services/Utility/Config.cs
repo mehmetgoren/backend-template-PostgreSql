@@ -1,12 +1,12 @@
-﻿namespace Server.Rest
+﻿namespace Server.Dal
 {
-    using Dal;
     using ionix.Data;
     using ionix.Utils.Collections;
     using ionix.Utils.Extensions;
     using Models;
 
-    public static class Config
+
+    internal static class Config
     {
         private static IndexedEntityList<AppSetting> _ixList;
 

@@ -1,5 +1,4 @@
-﻿// ReSharper disable All
-namespace Server.Models
+﻿namespace Server.Models
 {
     using ionix.Data;
 
@@ -19,7 +18,6 @@ namespace Server.Models
         public SqlQuery ToQuery() => Query();
     }
 
-
     public sealed class V_Menu : Menu, ISqlQueryProvider
     {
         [DbSchema(ColumnName = "parent_name")]
@@ -32,7 +30,6 @@ namespace Server.Models
 
         public SqlQuery ToQuery() => Query();
     }
-
 
     public class V_RoleAppUser : ISqlQueryProvider
     {
@@ -63,8 +60,6 @@ namespace Server.Models
 
         public SqlQuery ToQuery() => Query();
     }
-
-
 
     public class V_RoleControllerAction : ISqlQueryProvider
     {
@@ -106,8 +101,6 @@ namespace Server.Models
 
         public SqlQuery ToQuery() => Query();
     }
-
-
 
     public class V_RoleMenu : ISqlQueryProvider
     {

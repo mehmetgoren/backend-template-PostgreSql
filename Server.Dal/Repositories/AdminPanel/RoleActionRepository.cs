@@ -3,13 +3,12 @@
     using ionix.Utils.Extensions;
     using ionix.Data;
     using System.Collections.Generic;
-    using System.Linq;
     using Models;
 
 
-    public class RoleActionRepository : Repository<RoleAction>
+    internal class RoleActionRepository : Repository<RoleAction>
     {
-        public RoleActionRepository(ICommandAdapter cmd)
+        internal RoleActionRepository(ICommandAdapter cmd)
             : base(cmd)
         {
         }

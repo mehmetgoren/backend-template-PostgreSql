@@ -5,12 +5,13 @@
     using ionix.Data;
     using ionix.Utils.Extensions;
 
+
     //Ayrıca DB.Default u da buradan yönetebilirsin
-    public class DbContext : IDisposable
+    internal class DbContext : IDisposable
     {
         protected IDbAccess DbAccess { get; }
 
-        public DbContext(IDbAccess dbAccess)
+        internal DbContext(IDbAccess dbAccess)
         {
             this.DbAccess = dbAccess ?? throw new ArgumentNullException(nameof(dbAccess));
 
@@ -24,39 +25,39 @@
             this._roles = new Lazy<RoleRepository>(() => ionixFactory.CreateRepository<RoleRepository>(this.DbAccess), true);
         }
 
-        public int ExecuteNonQuery(string sql, params object[] pars)
+        internal int ExecuteNonQuery(string sql, params object[] pars)
         {
             return this.DbAccess.ExecuteNonQuery(sql.ToQuery(pars));
         }
 
-        public int ExecuteNonQuery(string sql)
+        internal int ExecuteNonQuery(string sql)
         {
             return this.DbAccess.ExecuteNonQuery(sql.ToQuery());
         }
 
         private readonly Lazy<ActionRepository> _actions;
-        public ActionRepository Actions => this._actions.Value;
+        internal ActionRepository Actions => this._actions.Value;
 
         private readonly Lazy<AppSettingRepository> _appSettings;
-        public AppSettingRepository AppSettings => this._appSettings.Value;
+        internal AppSettingRepository AppSettings => this._appSettings.Value;
 
         private readonly Lazy<AppUserRepository> _appUsers;
-        public AppUserRepository AppUsers => this._appUsers.Value;
+        internal AppUserRepository AppUsers => this._appUsers.Value;
 
         private readonly Lazy<ControllerRepository> _controllers;
-        public ControllerRepository Controllers => this._controllers.Value;
+        internal ControllerRepository Controllers => this._controllers.Value;
 
         private readonly Lazy<MenuRepository> _menus;
-        public MenuRepository Menus => this._menus.Value;
+        internal MenuRepository Menus => this._menus.Value;
 
         private readonly Lazy<RoleActionRepository> _roleActions;
-        public RoleActionRepository RoleActions => this._roleActions.Value;
+        internal RoleActionRepository RoleActions => this._roleActions.Value;
 
         private readonly Lazy<RoleMenuRepository> _roleMenus;
-        public RoleMenuRepository RoleMenus => this._roleMenus.Value;
+        internal RoleMenuRepository RoleMenus => this._roleMenus.Value;
 
         private readonly Lazy<RoleRepository> _roles;
-        public RoleRepository Roles => this._roles.Value;
+        internal RoleRepository Roles => this._roles.Value;
 
 
         public virtual void Dispose()
@@ -66,11 +67,11 @@
     }
 
     // it' s also like UnitOfWork.
-    public class TransactionalDbContext : DbContext, IDbTransaction
+    internal class TransactionalDbContext : DbContext, IDbTransaction
     {
         protected new ITransactionalDbAccess DbAccess => base.DbAccess.Cast<ITransactionalDbAccess>();
 
-        public TransactionalDbContext(ITransactionalDbAccess dbAccess) : base(dbAccess)
+        internal TransactionalDbContext(ITransactionalDbAccess dbAccess) : base(dbAccess)
         {
 
         }

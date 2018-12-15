@@ -4,13 +4,14 @@
     using System.Data;
     using ionix.Data;
 
-    public interface IDbClient : IDisposable
+
+    internal interface IDbClient : IDisposable
     {
         IDbAccess DataAccess { get; }
         ICommandAdapter Cmd { get; }
     }
 
-    public abstract class DbClient<TDbAccess> : IDbClient
+    internal abstract class DbClient<TDbAccess> : IDbClient
         where TDbAccess : IDbAccess
     {
         IDbAccess IDbClient.DataAccess => this.DataAccess;
@@ -21,7 +22,7 @@
             this.DataAccess = dataAccess;
         }
 
-      //  public ICommandFactory Factory => ionixFactory.CreateFactory(this.DataAccess);
+        //  public ICommandFactory Factory => ionixFactory.CreateFactory(this.DataAccess);
 
         public ICommandAdapter Cmd => ionixFactory.CreateCommand(this.DataAccess);
 
@@ -32,7 +33,7 @@
         }
     }
 
-    public sealed class DbClient : DbClient<IDbAccess>
+    internal sealed class DbClient : DbClient<IDbAccess>
     {
         internal DbClient(IDbAccess dbAccess)
             : base(dbAccess)
@@ -40,7 +41,7 @@
         }
     }
 
-    public sealed class TransactionalDbClient : DbClient<ITransactionalDbAccess>, IDbTransaction
+    internal sealed class TransactionalDbClient : DbClient<ITransactionalDbAccess>, IDbTransaction
     {
         internal TransactionalDbClient(ITransactionalDbAccess transactionalDbAccess)
             : base(transactionalDbAccess)

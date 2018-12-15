@@ -3,11 +3,11 @@
     using ionix.Data;
     using System.Collections.Generic;
     using Models;
+    using System.Threading.Tasks;
 
-
-    public class RoleRepository : Repository<Role>
+    internal class RoleRepository : Repository<Role>
     {
-        public RoleRepository(ICommandAdapter cmd)
+        internal RoleRepository(ICommandAdapter cmd)
             : base(cmd) { }
 
 
@@ -16,9 +16,9 @@
             return this.Cmd.Query<V_RoleControllerAction>(V_RoleControllerAction.Query());
         }
 
-        public IList<Role> SelectAdminsOnly()
+        public Task<IList<Role>> SelectAdminsOnlyAsync()
         {
-            return this.Select(" WHERE is_admin <> true".ToQuery());
+            return this.SelectAsync(" WHERE is_admin <> true".ToQuery());
         }
 
         public Role SelectByName(string name)

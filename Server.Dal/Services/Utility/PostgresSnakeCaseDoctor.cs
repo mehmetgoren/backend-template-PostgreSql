@@ -1,10 +1,11 @@
-﻿namespace Server.Rest.App_Code
+﻿namespace Server.Dal
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using ionix.Data;
     using Models;
+
 
     public static class PostgresSnakeCaseDoctor
     {

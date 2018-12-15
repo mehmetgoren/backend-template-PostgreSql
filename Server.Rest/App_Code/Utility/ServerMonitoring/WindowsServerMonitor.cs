@@ -79,7 +79,7 @@
             return Environment.ProcessorCount;
         }
 
-        private static double Round(double value) =>  Math.Round(value);
+        private static double Round(double value) => Math.Round(value);
 
         public virtual double GetCpuUsage()
         {

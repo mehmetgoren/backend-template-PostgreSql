@@ -1,4 +1,4 @@
-﻿namespace Server.Rest
+﻿namespace Server.Dal
 {
     using System;
     using System.Collections.Concurrent;
@@ -6,11 +6,11 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Reflection;
-    using Dal;
     using ionix.Utils;
     using ionix.Utils.Extensions;
     using ionix.Utils.Reflection;
     using Models;
+
 
     public static class Metadata
     {
@@ -80,6 +80,14 @@
                                 if (null != mla && mla.Length > 0)
                                 {
                                     f.MinLength = mla.Length;
+                                }
+                                var sla = pi.GetCustomAttribute<StringLengthAttribute>();
+                                if (null != sla)
+                                {
+                                    if (sla.MaximumLength > 0)
+                                        f.MaxLength = sla.MaximumLength;
+                                    if (sla.MinimumLength > 0)
+                                        f.MinLength = sla.MinimumLength;
                                 }
 
                                 f.ValidationType = pi.PropertyType.ToValidationType();

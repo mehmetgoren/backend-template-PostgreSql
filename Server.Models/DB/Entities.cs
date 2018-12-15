@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+
     [MigrationVersion(Migration100.VersionNo)]
     [Table("controller")]
     [TableIndex("name", Unique = true)]
@@ -29,7 +30,6 @@
         [DbSchema(ColumnName = "name", MaxLength = 50)]
         public string Name { get; set; }
     }
-
 
     [MigrationVersion(Migration100.VersionNo)]
     [Table("action")]
@@ -58,7 +58,6 @@
         public string Name { get; set; }
     }
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("app_setting")]
     public class AppSetting
@@ -81,7 +80,6 @@
         [DbSchema(ColumnName = "enabled")]
         public bool Enabled { get; set; }
     }
-
 
     [MigrationVersion(Migration100.VersionNo)]
     [Table("role")]
@@ -110,7 +108,6 @@
         [DbSchema(ColumnName = "can_use_web_socket")]
         public bool? CanUseWebSockets { get; set; }
     }
-
 
     [MigrationVersion(Migration100.VersionNo)]
     [Table("role_action")]
@@ -141,7 +138,6 @@
         [DbSchema(ColumnName = "enabled")]
         public bool? Enabled { get; set; }
     }
-
 
     [MigrationVersion(Migration100.VersionNo)]
     [Table("menu")]
@@ -188,7 +184,6 @@
         public List<Menu> Childs { get; set; } = new List<Menu>();
     }
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("role_menu")]
     [TableIndex("role_id", "menu_id", Unique = true)]
@@ -218,7 +213,6 @@
         [DbSchema(ColumnName = "has_access")]
         public bool HasAccess { get; set; }
     }
-
 
     [MigrationVersion(Migration100.VersionNo)]
     [Table("app_user")]

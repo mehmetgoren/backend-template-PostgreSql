@@ -3,15 +3,16 @@
     using ionix.Data;
     using Models;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    public class MenuRepository : Repository<Menu>
+    internal class MenuRepository : Repository<Menu>
     {
-        public MenuRepository(ICommandAdapter cmd)
+        internal MenuRepository(ICommandAdapter cmd)
             : base(cmd) { }
 
-        public IEnumerable<V_Menu> GetV_MenuList()
+        public Task<IList<V_Menu>> GetV_MenuListAsync()
         {
-            return this.Cmd.Query<V_Menu>(V_Menu.Query());
+            return this.Cmd.QueryAsync<V_Menu>(V_Menu.Query());
         }
     }
 }

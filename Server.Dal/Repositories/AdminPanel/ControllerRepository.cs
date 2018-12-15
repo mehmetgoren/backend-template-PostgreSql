@@ -4,9 +4,9 @@
     using System;
     using Models;
 
-    public class ControllerRepository : Repository<Controller>
+    internal class ControllerRepository : Repository<Controller>
     {
-        public ControllerRepository(ICommandAdapter cmd)
+        internal ControllerRepository(ICommandAdapter cmd)
             : base(cmd)
         {
         }

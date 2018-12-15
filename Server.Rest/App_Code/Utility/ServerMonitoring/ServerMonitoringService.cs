@@ -9,7 +9,7 @@
         public ServerInfo ServerInfo { get; set; }
     }
 
-    public sealed class ServerMonitoringService: NanoServiceBase, IDisposable
+    public sealed class ServerMonitoringService : NanoServiceBase, IDisposable
     {
         public static readonly ServerMonitoringService Instance = new ServerMonitoringService(TimeSpan.FromSeconds(2), new WindowsServerMonitor());
 

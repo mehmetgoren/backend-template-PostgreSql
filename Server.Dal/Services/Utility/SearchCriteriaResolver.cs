@@ -1,17 +1,16 @@
-﻿namespace Server.Rest
+﻿namespace Server.Dal
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Reflection;
-    using App_Code;
-    using Dal;
     using ionix.Data;
     using ionix.Utils;
     using ionix.Utils.Extensions;
     using Models;
     using Newtonsoft.Json;
+
 
     public struct SearchResult
     {

@@ -3,10 +3,12 @@
     using ionix.Data;
     using Models;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    public class RoleMenuRepository : Repository<RoleMenu>
+
+    internal class RoleMenuRepository : Repository<RoleMenu>
     {
-        public RoleMenuRepository(ICommandAdapter cmd)
+        internal RoleMenuRepository(ICommandAdapter cmd)
             : base(cmd) { }
 
         public int DeleteByRoleId(int roleId)
@@ -16,9 +18,6 @@
             return this.DataAccess.ExecuteNonQuery(q);
         }
 
-        public IEnumerable<V_RoleMenu> GetV_RoleMenuList(int roleId)
-        {
-            return this.Cmd.Query<V_RoleMenu>(V_RoleMenu.Query(roleId));
-        }
+        public Task<IList<V_RoleMenu>> GetV_RoleMenuList(int roleId) => this.Cmd.QueryAsync<V_RoleMenu>(V_RoleMenu.Query(roleId));
     }
 }

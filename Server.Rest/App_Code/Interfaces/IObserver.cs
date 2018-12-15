@@ -2,6 +2,6 @@
 {
     public interface IObserver
     {
-        void Notify(object args,  string message);
+        void Notify(object args, string message);
     }
 }
