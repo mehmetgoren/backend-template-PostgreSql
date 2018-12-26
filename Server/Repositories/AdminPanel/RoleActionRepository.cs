@@ -1,4 +1,4 @@
-﻿namespace Server.Dal
+﻿namespace Server
 {
     using ionix.Utils.Extensions;
     using ionix.Data;

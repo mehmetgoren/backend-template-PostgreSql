@@ -1,4 +1,4 @@
-﻿namespace Server.Dal
+﻿namespace Server
 {
     using System.Linq;
     using System.Diagnostics;

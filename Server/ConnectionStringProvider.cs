@@ -1,4 +1,4 @@
-﻿namespace Server.Dal
+﻿namespace Server
 {
     public enum DB
     {

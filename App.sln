@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server.Models", "Server.Models\Server.Models.csproj", "{78E00D52-6446-47AC-A37B-7A44DEFB0307}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server.Dal", "Server.Dal\Server.Dal.csproj", "{A7F2F88A-B938-419D-878E-0C8EC76BA8FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{A7F2F88A-B938-419D-878E-0C8EC76BA8FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server.Rest", "Server.Rest\Server.Rest.csproj", "{A6BCA1E3-DEC6-4B50-82BB-4687E2E8C2A0}"
 EndProject

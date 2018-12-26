@@ -1,4 +1,4 @@
-﻿namespace Server.Dal
+﻿namespace Server
 {
     using System.Collections.Generic;
     using ionix.Data;

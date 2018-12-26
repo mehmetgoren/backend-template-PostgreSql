@@ -1,4 +1,4 @@
-﻿namespace Server.Dal.Services
+﻿namespace Server.Services
 {
     using Server.Models;
     using System;
