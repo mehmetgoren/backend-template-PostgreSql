@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+
     internal class MenuRepository : Repository<Menu>
     {
         internal MenuRepository(ICommandAdapter cmd)

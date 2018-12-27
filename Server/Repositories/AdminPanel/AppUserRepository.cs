@@ -4,6 +4,7 @@
     using ionix.Data;
     using Models;
 
+
     internal class AppUserRepository : Repository<AppUser>
     {
         internal AppUserRepository(ICommandAdapter cmd)

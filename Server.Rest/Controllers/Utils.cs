@@ -1,113 +1,94 @@
-﻿namespace Server.Rest
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using ionix.Data;
-    using ionix.Rest;
-    using ionix.Utils.Extensions;
-    using Microsoft.AspNetCore.Mvc;
-    using Models;
-    using Server.Dal;
-
-    [TokenTableAuth]
-    public class UtilsController : ApiController
-    {
-        public UtilsController(Lazy<DbContext> db)
-            : base(db) { }
-
-        //Örneğin İki Tarih Arası İStenirse bunu bir attribute ile meta dataya göm ve sayı tarih vb tüm alanlar için Kullan.
-        [HttpPost]
-        public IActionResult Search([FromBody] SearchParams searchParams)
-        {
-            SearchResult result = default(SearchResult);
-            return this.ResultList(() =>
-            {
-                result = new SearchCriteriaResolver().Search(searchParams);
-                return result.EntityList;
-            }, () => result.Total);
-        }
+﻿//namespace Server.Rest
+//{
+//    using System;
+//    using System.Collections.Generic;
+//    using System.Text;
+//    using ionix.Data;
+//    using ionix.Rest;
+//    using ionix.Utils.Extensions;
+//    using Microsoft.AspNetCore.Mvc;
+//    using Models;
 
 
-        [HttpPost]
-        public IActionResult GetMetaData([FromBody] HashSet<string> typeFullNameList)
-        {
-            return this.ResultList(() => Metadata.Get(typeFullNameList));
-        }
+//    [TokenTableAuth]
+//    public class UtilsController : ApiController
+//    {
+//        private IUtilsService UtilsService { get; }
 
+//        public UtilsController(IUtilsService utilsService)
+//        {
+//            this.UtilsService = utilsService ?? throw new ArgumentNullException(nameof(utilsService));
+//        }
 
-        [HttpGet]
-        public IActionResult QueryLog(string query)
-        {
-            try
-            {
-                var plainTextBytes = Convert.FromBase64String(query);
-                query = Encoding.UTF8.GetString(plainTextBytes);
+//        //Örneğin İki Tarih Arası İStenirse bunu bir attribute ile meta dataya göm ve sayı tarih vb tüm alanlar için Kullan.
+//        [HttpPost]
+//        public IActionResult Search([FromBody] SearchParams searchParams)
+//        {
+//            SearchResult result = default;
+//            return this.ResultList(() =>
+//            {
+//                result = this.UtilsService.Search(searchParams);
+//                return result.EntityList;
+//            }, () => result.Total);
+//        }
 
-                List<dynamic> ret = new List<dynamic>();
-                if (!String.IsNullOrEmpty(query))
-                {
-                    ret.AddRange(SQLog.Logger.Logs.Query(query.ToQuery()));
-                }
+//        [HttpPost]
+//        public IActionResult GetMetaData([FromBody] HashSet<string> typeFullNameList)
+//        {
+//            return this.ResultList(() => this.UtilsService.GetMetaData(typeFullNameList));
+//        }
 
-                return this.ResultList(() => ret);
-            }
-            catch(Exception ex)
-            {
-                ex = ex.FindRoot();
-                return this.ResultAsMessage(ex.Message);
-            }
-        }
+//        [HttpGet]
+//        public IActionResult QueryLog(string query)
+//        {
+//            try
+//            {
+//                var plainTextBytes = Convert.FromBase64String(query);
+//                query = Encoding.UTF8.GetString(plainTextBytes);
 
-        [HttpGet]// only admin can acces this method.
-        public IActionResult ResetServerApp()
-        {
-            return this.ResultSingle(() =>
-            {
-                //Başka bir dış process bunu yapacak ve tekrar açacak.
-                //var process = new Process
-                //{
-                //    StartInfo =
-                //    {
-                //        Verb = "runas",
-                //        WorkingDirectory = @"C:\Windows\System32\",
-                //        FileName = @"issreset.exe"
-                //    }
-                //};
-                //process.Start();
+//                List<dynamic> ret = new List<dynamic>();
+//                if (!String.IsNullOrEmpty(query))
+//                {
+//                    ret.AddRange(SQLog.Logger.Logs.Query(query.ToQuery()));
+//                }
 
-                return 1;
-            });
-        }
+//                return this.ResultList(() => ret);
+//            }
+//            catch (Exception ex)
+//            {
+//                ex = ex.FindRoot();
+//                return this.ResultAsMessage(ex.Message);
+//            }
+//        }
 
-        [HttpGet]
-        public IActionResult GetConnectedUsers()
-        {
-            return this.ResultList(() =>
-            {
-                ICollection<V_AppUser> ret = new List<V_AppUser>();
-                var users = TokenTable.Instance.GetCurrentUserList();
-                if (!users.IsEmptyList())
-                {
-                    foreach (User user in users)
-                    {
-                        V_AppUser entity = this.Db.AppUsers.QueryViewBy(user.Name);
+//        [HttpGet]
+//        public IActionResult GetConnectedUsers()
+//        {
+//            return this.ResultList(() =>
+//            {
+//                ICollection<V_AppUser> ret = new List<V_AppUser>();
+//                var users = TokenTable.Instance.GetCurrentUserList();
+//                if (!users.IsEmptyList())
+//                {
+//                    foreach (User user in users)
+//                    {
+//                        V_AppUser entity = this.Db.AppUsers.QueryViewBy(user.Name);
 
-                        if (null != entity)
-                        {
-                            ret.Add(entity);
-                        }
-                    }
-                }
+//                        if (null != entity)
+//                        {
+//                            ret.Add(entity);
+//                        }
+//                    }
+//                }
 
-                return ret;
-            });
-        }
+//                return ret;
+//            });
+//        }
 
-        [HttpGet]
-        public IActionResult GetLanguageDictionary()
-        {
-            return this.ResultSingle(() => DataSources.Jsons.LanguageDictionary);
-        }
-    }
-}
+//        [HttpGet]
+//        public IActionResult GetLanguageDictionary()
+//        {
+//            return this.ResultSingle(() => DataSources.Jsons.LanguageDictionary);
+//        }
+//    }
+//}

@@ -9,7 +9,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Serialization;
-    using Server.Dal;
 
     public class Startup
     {
@@ -17,10 +16,10 @@
         {
             Configuration = configuration;
 
-            ionixFactory.SetConnectionStringProviderType<ConnectionStringProvider>();
+            //*ionixFactory.SetConnectionStringProviderType<ConnectionStringProvider>();
             IndexedRoles.IgnoreCase = true;
-            TokenTableParams.SessionTimeout = Config.WebApiSessionTimeout;
-            ionixFactory.InitMigration();
+            //*TokenTableParams.SessionTimeout = Config.WebApiSessionTimeout;
+            //*ionixFactory.InitMigration();
 
             StartNanoServices();
         }
@@ -35,9 +34,11 @@
                 
             });
 
-            services.AddSingleton<ServerMonitoringHubImpl, ServerMonitoringHubImpl>();
+            //services.AddSingleton<IUtilsService, UtilsService>();
 
-            services.AddScoped<Lazy<DbContext>, Lazy<DbContext>>((sp) => new Lazy<DbContext>(ionixFactory.CreateDbContext, true));//Bu Yapıda Gereksiz DbConetx ve connection nesnesi oluşturuluyor
+            //*services.AddSingleton<ServerMonitoringHubImpl, ServerMonitoringHubImpl>();
+
+            //*services.AddScoped<Lazy<DbContext>, Lazy<DbContext>>((sp) => new Lazy<DbContext>(ionixFactory.CreateDbContext, true));//Bu Yapıda Gereksiz DbConetx ve connection nesnesi oluşturuluyor
 
             services.AddSignalR(options =>
             {
@@ -57,8 +58,8 @@
                 app.UseDeveloperExceptionPage();
             }
 
-            if (Config.WebApiAuthEnabled)
-                app.UseTokenTableAuthentication(TokenTable.Instance, AuthorizationValidator.Instance);
+            //*if (Config.WebApiAuthEnabled)
+               //* app.UseTokenTableAuthentication(TokenTable.Instance, AuthorizationValidator.Instance);
 
             app.UseCors(builder =>
             {
@@ -79,7 +80,7 @@
             //signalr
             app.UseSignalR(routes =>
             {
-                routes.MapHubs(Assembly.GetExecutingAssembly());
+                //*routes.MapHubs(Assembly.GetExecutingAssembly());
                 //routes.MapHub<ServerMonitoringHub>("/servermonitoring");
                 //routes.MapHub<ImagesHub>("/images");
             });

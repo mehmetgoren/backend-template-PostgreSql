@@ -5,6 +5,7 @@
     using Models;
     using System.Threading.Tasks;
 
+
     internal class RoleRepository : Repository<Role>
     {
         internal RoleRepository(ICommandAdapter cmd)

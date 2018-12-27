@@ -3,7 +3,6 @@
     using ionix.Data;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using Server.Dal;
     using System;
     using System.IO;
     using ionix.Data.PostgreSql;
@@ -13,7 +12,7 @@
     {
         public static void Main(string[] args)
         {
-            ionixFactory.OnLogSqlScript = LogSqlScript;
+            //ionixFactory.OnLogSqlScript = LogSqlScript;
             BuildWebHost(args).Run();
         }
 

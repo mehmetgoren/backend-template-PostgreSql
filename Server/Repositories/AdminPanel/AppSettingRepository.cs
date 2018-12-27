@@ -4,6 +4,7 @@
     using Models;
     using System.Threading.Tasks;
 
+
     internal class AppSettingRepository : Repository<AppSetting>
     {
         internal AppSettingRepository(ICommandAdapter cmd)
