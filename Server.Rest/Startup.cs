@@ -1,7 +1,6 @@
 ﻿namespace Server.Rest
 {
     using System;
-    using System.Reflection;
     using ionix.Rest;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -12,14 +11,19 @@
 
     public class Startup
     {
+        internal static IServiceCollection ServiceCollection { get; private set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
 
-            //*ionixFactory.SetConnectionStringProviderType<ConnectionStringProvider>();
             IndexedRoles.IgnoreCase = true;
-            //*TokenTableParams.SessionTimeout = Config.WebApiSessionTimeout;
-            //*ionixFactory.InitMigration();
+
+            OnStartup.Instance
+                .SetConnectionStringProviderType<ConnectionStringProvider>()
+                .InitMigration();
+
+            TokenTableParams.SessionTimeout = Config.WebApiSessionTimeout;
 
             StartNanoServices();
         }
@@ -34,7 +38,8 @@
                 
             });
 
-            //services.AddSingleton<IUtilsService, UtilsService>();
+            services.AddSingleton<IUtilsService, UtilsService>();
+            services.AddSingleton<IAuthService, AuthService>();
 
             //*services.AddSingleton<ServerMonitoringHubImpl, ServerMonitoringHubImpl>();
 
@@ -48,6 +53,8 @@
             {
                 config.PayloadSerializerSettings.ContractResolver = new DefaultContractResolver();//to disable camelCase
             });
+
+            ServiceCollection = services;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

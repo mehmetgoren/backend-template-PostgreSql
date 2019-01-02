@@ -6,7 +6,6 @@
     using ionix.Data;
     using ionix.Migration;
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("controller")]
     [TableIndex("name", Unique = true)]

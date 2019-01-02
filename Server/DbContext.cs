@@ -5,7 +5,6 @@
     using ionix.Data;
     using ionix.Utils.Extensions;
 
-
     //Ayrıca DB.Default u da buradan yönetebilirsin
     internal class DbContext : IDisposable
     {

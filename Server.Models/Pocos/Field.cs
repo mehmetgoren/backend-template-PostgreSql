@@ -3,7 +3,6 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-
     public sealed class Field
     {
         public string PropertyName { get; set; }

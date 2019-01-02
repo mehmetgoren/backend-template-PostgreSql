@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
 
-
     public abstract class BaseService
     {
         internal virtual T Execute<T>(Func<DbContext, T> func)

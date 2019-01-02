@@ -11,7 +11,6 @@
     using Models;
     using Newtonsoft.Json;
 
-
     public struct SearchResult
     {
         public IEnumerable<object> EntityList { get; set; }
@@ -91,7 +90,7 @@
                     betweenColumns.Add(ba.FirstProperty);
                     betweenColumns.Add(ba.SecondProperty);
 
-                    betweenColumns.Add(ba.ColumnName); //?
+                    betweenColumns.Add(ba.ColumnName);
 
                     object firstVal = entityType.GetProperty(ba.FirstProperty).GetValue(entity);
                     if (!firstVal.IsNull())
@@ -226,7 +225,7 @@
                 if (sort.IsEmptyList())
                 {
                     PropertyMetaData pm = metaData.Properties.FirstOrDefault((p) => p.Schema.IsKey);
-                    if (null == pm) //Hiç pk yok ise.
+                    if (null == pm)
                     {
                         pm = metaData.Properties.First();
                     }
@@ -237,7 +236,7 @@
                 query = query.ToPagingQuery(sort.First(), page.Value, take.Value);
             }
 
-            using (var c = ionixFactory.CreateDbClient())//Bu da Parametrik Olacak.
+            using (var c = ionixFactory.CreateDbClient())
             {
                 ret.EntityList = (IEnumerable<object>)c.Cmd.QueryNonGeneric(entityType, query);
 
@@ -250,7 +249,7 @@
                     ret.Total = c.Cmd.QuerySingle<int>(countQuery);
                 }
             }
-            //System.Threading.Thread.Sleep(1000);
+
             return ret;
         }
     }

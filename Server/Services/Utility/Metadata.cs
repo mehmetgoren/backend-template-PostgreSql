@@ -11,7 +11,6 @@
     using ionix.Utils.Reflection;
     using Models;
 
-
     public static class Metadata
     {
         private static readonly string ModelsAssemblyName = Assembly.GetExecutingAssembly().FullName.Split('.')[0] + ".Models";// "Server.Models";
@@ -176,6 +175,5 @@
             }
             return ValidationType.any;
         }
-
     }
 }

@@ -2,8 +2,7 @@
 {
     using ionix.Data;
 
-
-    public class V_RoleControllerAction : ISqlQueryProvider
+    public class RoleControllerActionView : ISqlQueryProvider
     {
         [DbSchema(ColumnName = "role_id", IsKey = true)]
         public int RoleId { get; set; }

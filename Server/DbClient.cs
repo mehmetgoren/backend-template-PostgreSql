@@ -4,7 +4,6 @@
     using System.Data;
     using ionix.Data;
 
-
     internal interface IDbClient : IDisposable
     {
         IDbAccess DataAccess { get; }

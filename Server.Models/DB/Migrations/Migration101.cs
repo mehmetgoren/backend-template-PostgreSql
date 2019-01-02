@@ -4,7 +4,6 @@
     using ionix.Migration;
     using System.Collections.Generic;
 
-
     public sealed class Migration101 : Migration
     {
         public const string VersionNo = "1.0.1";

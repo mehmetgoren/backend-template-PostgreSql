@@ -7,7 +7,6 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-
     public sealed class CustomFilter//Extra ve standart json da olmayan alanlar için eklenöiş.
     {
         public string Field { get; set; }//ın Serverside equals to PropertyName

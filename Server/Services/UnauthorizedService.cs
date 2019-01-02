@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-
     public class UnauthorizedService : BaseService
     {
         public async Task<UserLocal> Login(Credentials credentials, Func<Credentials, Guid?> createTokenFn)

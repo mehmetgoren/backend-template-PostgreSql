@@ -3,7 +3,6 @@
     using Server.Models;
     using System.Collections.Generic;
 
-
     public class UtilsService : IUtilsService
     {
         //Örneğin İki Tarih Arası İStenirse bunu bir attribute ile meta dataya göm ve sayı tarih vb tüm alanlar için Kullan.

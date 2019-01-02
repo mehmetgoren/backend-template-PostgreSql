@@ -3,7 +3,7 @@
     using ionix.Data;
     using System.Collections.Generic;
     using Models;
-
+    using System.Threading.Tasks;
 
     internal class ActionRepository : Repository<Action>
     {
@@ -12,15 +12,9 @@
         {
         }
 
-        public IList<Action> SelectByControllerId(int controllerId)
-        {
-            return this.Select(" where controller_id=:0".ToQuery(controllerId));
-        }
+        public IList<Action> SelectByControllerId(int controllerId) => this.Select(" where controller_id=:0".ToQuery(controllerId));
 
-        public Action SelectSingleByUniqueKeys(int controllerId, string name)
-        {
-            return this.SelectSingle(" where controller_id=:0 and name=:1".ToQuery(controllerId, name));
-        }
+        public Task<Action> SelectSingleByUniqueKeysAsync(int controllerId, string name) =>  this.SelectSingleAsync(" where controller_id=:0 and name=:1".ToQuery(controllerId, name));
 
         public int DeleteByControllerId(int controllerId)
         {

@@ -8,7 +8,8 @@
     using System.Threading;
     using Models;
     using Newtonsoft.Json.Linq;
-
+    using System.Collections;
+    using ionix.Utils.Reflection;
 
     public static class Utility
     {
@@ -112,6 +113,37 @@
             Thread.Sleep(1);
             var random = new Random(DateTime.Now.Millisecond);
             return $"#{random.Next(0x1000000):X6}"; 
+        }
+
+
+        public static IEnumerable<T> MapListTo<T>(this IEnumerable sourceList)
+            where T:new()
+        {
+            List<T> ret = new List<T>();
+            if (null != sourceList)
+            {
+                foreach (object source in sourceList)
+                {
+                    T dest = new T();
+                    dest.CopyPropertiesFrom(source);
+                }
+            } 
+
+            return ret;
+        }
+
+        public static T MapTo<T>(this object source)
+             where T : new()
+        {
+            if (null != source)
+            {
+                T dest = new T();
+                dest.CopyPropertiesFrom(source);
+
+                return dest;
+            }
+
+            return default;
         }
     }
 }

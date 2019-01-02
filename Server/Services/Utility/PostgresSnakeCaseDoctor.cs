@@ -6,7 +6,6 @@
     using ionix.Data;
     using Models;
 
-
     public static class PostgresSnakeCaseDoctor
     {
         public static SearchSortRequest[] FixSortFieldName(IEntityMetaData metaData , SearchSortRequest[] sort)

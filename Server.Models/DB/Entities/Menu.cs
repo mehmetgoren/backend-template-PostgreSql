@@ -7,7 +7,6 @@
     using ionix.Migration;
     using System.Collections.Generic;
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("menu")]
     [TableIndex("name", Unique = true)]

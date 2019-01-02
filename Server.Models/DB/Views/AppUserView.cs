@@ -2,8 +2,7 @@
 {
     using ionix.Data;
 
-
-    public class V_AppUser : AppUser, ISqlQueryProvider
+    public class AppUserView : AppUser, ISqlQueryProvider
     {
         [DbSchema(ColumnName = "role_name")]
         public string RoleName { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Server.Services
+﻿namespace Server
 {
     using Server.Models;
     using System;
@@ -10,12 +10,11 @@
     using ionix.Utils.Extensions;
     using System.Reflection;
 
-
     public partial class AdminPanelService : BaseService
     {
         public Task<IList<Role>> GetRoles() => this.ExecuteAsync(db => db.Roles.SelectAsync());
 
-        public Task<IList<Role>> GetRolesNoAdmin() => this.ExecuteAsync(db => db.Roles.SelectAdminsOnlyAsync());
+        public Task<IList<Role>> GetRolesAsNoAdmin() => this.ExecuteAsync(db => db.Roles.SelectAdminsOnlyAsync());
 
         public async Task<int> SaveRole(Role role)
         {
@@ -39,7 +38,7 @@
             }
         }
 
-        public Task<IList<V_Menu>> GetMenus() => this.ExecuteAsync(db => db.Menus.GetV_MenuListAsync());
+        public Task<IList<MenuView>> GetMenus() => this.ExecuteAsync(db => db.Menus.QueryMenuAsync());
 
         public async Task<int> SaveMenu(Menu menu)
         {
@@ -118,7 +117,7 @@
             return list;
         }
 
-        public Task<IList<V_RoleMenu>> GetRoleMenuList(int roleId) => this.ExecuteAsync(db => db.RoleMenus.GetV_RoleMenuList(roleId));
+        public Task<IList<RoleMenuView>> GetRoleMenuViews(int roleId) => this.ExecuteAsync(db => db.RoleMenus.QueryRoleMenuViewByAsync(roleId));
 
         public async Task<int> SaveRoleMenu(ApiParameter ap)
         {
@@ -128,7 +127,7 @@
                 int roleId = ap[nameof(roleId)].ConvertTo<int>();
                 JArray vRoleMenus = (JArray)ap[nameof(vRoleMenus)];
 
-                IEnumerable<V_RoleMenu> list = vRoleMenus.ToTypedList<V_RoleMenu>();
+                IEnumerable<RoleMenuView> list = vRoleMenus.ToTypedList<RoleMenuView>();
 
                 if (!list.IsEmptyList())
                 {
@@ -139,9 +138,9 @@
 
                     using (var tran = this.CreateTransactionalDbContext())
                     {
-                        ret += tran.RoleMenus.DeleteByRoleId(roleId);
+                        ret += await tran.RoleMenus.DeleteByRoleIdAsync(roleId);
 
-                        foreach (V_RoleMenu item in list)
+                        foreach (RoleMenuView item in list)
                         {
                             RoleMenu rm = new RoleMenu();
                             rm.HasAccess = item.HasAccess ?? false;
@@ -217,7 +216,7 @@
             {
                 using (var db = this.CreateTransactionalDbContext())
                 {
-                    ret += await db.AppSettings.DeleteAll();
+                    ret += await db.AppSettings.DeleteAllAsync();
                     foreach (AppSetting appSetting in appSettingList)
                     {
                        ret += await db.AppSettings.InsertAsync(appSetting);

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using ionix.Data;
 
-
     public sealed class SearchRequest
     {
         public string TypeFullName { get; set; }

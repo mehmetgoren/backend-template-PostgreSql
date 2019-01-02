@@ -3,7 +3,7 @@
     using ionix.Data;
     using System;
     using Models;
-
+    using System.Threading.Tasks;
 
     internal class ControllerRepository : Repository<Controller>
     {
@@ -12,13 +12,14 @@
         {
         }
 
-        public Controller SelectSingleByName(string name)
+        public Task<Controller> SelectSingleByNameAsync(string name)
         {
             if (!String.IsNullOrEmpty(name))
             {
-                return this.SelectSingle(" where name=:0".ToQuery(name));
+                return this.SelectSingleAsync(" where name=:0".ToQuery(name));
             }
-            return null;
+
+            return Task.FromResult<Controller>(default);
         }
     }
 }

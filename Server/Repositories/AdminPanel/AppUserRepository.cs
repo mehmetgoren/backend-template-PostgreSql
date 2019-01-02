@@ -1,9 +1,9 @@
 ﻿namespace Server
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using ionix.Data;
     using Models;
-
 
     internal class AppUserRepository : Repository<AppUser>
     {
@@ -12,15 +12,12 @@
         {
         }
 
-        public IEnumerable<V_AppUser> QueryView()
-        {
-            return this.Cmd.Query<V_AppUser>(V_AppUser.Query());
-        }
+        public Task<IList<AppUserView>> QueryViewAsync() => this.Cmd.QueryAsync<AppUserView>(AppUserView.Query());
 
-        public V_AppUser QueryViewBy(string userName)
+        public Task<AppUserView> QuerySingleViewByAsync(string userName)
         {
-            var q = V_AppUser.Query().ToInnerQuery("t").Sql(" where t.user_name=:0", userName);
-            return this.Cmd.QuerySingle<V_AppUser>(q);
+            var q = AppUserView.Query().ToInnerQuery("t").Sql(" where t.user_name=:0", userName);
+            return this.Cmd.QuerySingleAsync<AppUserView>(q);
         }
     }
 }

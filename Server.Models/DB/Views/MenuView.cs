@@ -2,8 +2,7 @@
 {
     using ionix.Data;
 
-
-    public sealed class V_Menu : Menu, ISqlQueryProvider
+    public sealed class MenuView : Menu, ISqlQueryProvider
     {
         [DbSchema(ColumnName = "parent_name")]
         public string ParentName { get; set; }

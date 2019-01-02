@@ -5,8 +5,7 @@
     using ionix.Utils.Extensions;
     using Models;
 
-
-    internal static class Config
+    public static class Config
     {
         private static IndexedEntityList<AppSetting> _ixList;
 
@@ -22,9 +21,9 @@
                         if (null == _ixList)
                         {
                             _ixList = IndexedEntityList<AppSetting>.Create(p => p.Name);
-                            using (var c = ionixFactory.CreateDbClient())
+                            using (var db = ionixFactory.CreateDbContext())
                             {
-                                _ixList.AddRange(c.Cmd.Select<AppSetting>());
+                                _ixList.AddRange(db.AppSettings.Select());
                             }
                         }
                     }

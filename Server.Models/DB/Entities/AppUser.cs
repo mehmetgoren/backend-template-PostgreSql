@@ -7,7 +7,6 @@
     using ionix.Migration;
     using System.ComponentModel.DataAnnotations;
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("app_user")]
     [TableIndex("user_name", Unique = true)]

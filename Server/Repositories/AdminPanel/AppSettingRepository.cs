@@ -4,7 +4,6 @@
     using Models;
     using System.Threading.Tasks;
 
-
     internal class AppSettingRepository : Repository<AppSetting>
     {
         internal AppSettingRepository(ICommandAdapter cmd)
@@ -13,6 +12,6 @@
             
         }
 
-        public Task<int> DeleteAll() => this.DataAccess.ExecuteNonQueryAsync("delete from app_setting".ToQuery());
+        public Task<int> DeleteAllAsync() => this.DataAccess.ExecuteNonQueryAsync("delete from app_setting".ToQuery());
     }
 }

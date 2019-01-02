@@ -2,8 +2,7 @@
 {
     using ionix.Data;
 
-
-    public class V_RoleMenu : ISqlQueryProvider
+    public class RoleMenuView : ISqlQueryProvider
     {
         [DbSchema(ColumnName = "menu_id", IsKey = true)]
         public int MenuId { get; set; }

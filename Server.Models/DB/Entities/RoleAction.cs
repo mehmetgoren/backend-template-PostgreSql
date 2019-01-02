@@ -6,7 +6,6 @@
     using ionix.Data;
     using ionix.Migration;
 
-
     [MigrationVersion(Migration100.VersionNo)]
     [Table("role_action")]
     [TableIndex("role_id", "action_id", Unique = true)]
