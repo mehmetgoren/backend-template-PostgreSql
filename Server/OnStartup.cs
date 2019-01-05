@@ -4,6 +4,7 @@
     using ionix.Migration.PostgreSql;
     using System;
     using System.Linq;
+    using System.Reflection;
 
     public sealed class OnStartup
     {
@@ -55,9 +56,8 @@
                     {
                         using (var client = ionixFactory.CreateTransactionalDbClient())
                         {
-                            new MigrationInitializer(null).Execute(
-                                AppDomain.CurrentDomain.GetAssemblies().First(p => p.FullName.StartsWith($"{nameof(Server)}.{nameof(Models)}")),
-                                client.Cmd, false);
+                            Assembly modelAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetReferencedAssemblies().First(p => p.FullName.StartsWith($"{nameof(Server)}.{nameof(Models)}")));
+                            new MigrationInitializer(null).Execute(modelAssembly, client.Cmd, false);
 
                             client.Commit();
                         }
