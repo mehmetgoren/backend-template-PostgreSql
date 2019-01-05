@@ -70,7 +70,7 @@
             return this;
         }
 
-        public Action<ExecuteSqlCompleteEventArgs> OnLogSqlScript { get; private set; }
+        internal Action<ExecuteSqlCompleteEventArgs> OnLogSqlScript { get; private set; }
         public OnStartup LogSqlScript(Action<ExecuteSqlCompleteEventArgs> action)
         {
             this.OnLogSqlScript = action;

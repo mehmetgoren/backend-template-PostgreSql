@@ -8,9 +8,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class UnauthorizedService : BaseService
+    public class UnauthorizedService : BaseService, IUnauthorizedService
     {
-        public async Task<UserLocal> Login(Credentials credentials, Func<Credentials, Guid?> createTokenFn)
+        public async Task<UserLocal> LoginAsync(Credentials credentials, Func<Guid?> createTokenFn)
         {
             StackTrace stackTrace = new StackTrace();
             UserLocal ret = null;
@@ -26,7 +26,7 @@
                         {
                             ret = new UserLocal();
                             ret.Name = credentials.Username;
-                            ret.Token = createTokenFn(credentials);
+                            ret.Token = createTokenFn();
 
                             if (appUser.LoginCount == null)
                                 appUser.LoginCount = 0L;
@@ -59,11 +59,6 @@
             return ret;
         }
 
-        //public IActionResult Logout(Guid token)
-        //{
-        //    return this.ResultSingle(() => TokenTable.Instance.Logout(token));
-        //}
-
         public IList<AppSetting> GetAppSettingList()
         {
             using (var db = ionixFactory.CreateDbContext())
@@ -71,7 +66,6 @@
                 return db.AppSettings.Select();
             }
         }
-
 
         public IEnumerable<Menu> MenuListAsTree()
         {
@@ -85,7 +79,6 @@
 
             return menuList;
         }
-
 
         private static Menu FindInTree(IEnumerable<Menu> list, int id)
         {
@@ -122,6 +115,15 @@
             }
             return list;
         }
+    }
+
+    public interface IUnauthorizedService
+    {
+        Task<UserLocal> LoginAsync(Credentials credentials, Func<Guid?> createTokenFn);
+
+        IList<AppSetting> GetAppSettingList();
+
+        IEnumerable<Menu> MenuListAsTree();
     }
 
     public struct Credentials

@@ -10,13 +10,13 @@
     using ionix.Utils.Extensions;
     using System.Reflection;
 
-    public partial class AdminPanelService : BaseService
+    public class AdminPanelService : BaseService, IAdminPanelService
     {
-        public Task<IList<Role>> GetRoles() => this.ExecuteAsync(db => db.Roles.SelectAsync());
+        public async Task<IEnumerable<Role>> GetRolesAsync() => await this.ExecuteAsync(db => db.Roles.SelectAsync());
 
-        public Task<IList<Role>> GetRolesAsNoAdmin() => this.ExecuteAsync(db => db.Roles.SelectAdminsOnlyAsync());
+        public async Task<IEnumerable<Role>> GetRolesAsNoAdminAsync() => await this.ExecuteAsync(db => db.Roles.SelectAdminsOnlyAsync());
 
-        public async Task<int> SaveRole(Role role)
+        public async Task<int> SaveRoleAsync(Role role)
         {
             if (!role.IsModelValid())
                 return 0;
@@ -27,7 +27,7 @@
             }
         }
 
-        public async Task<int> DeleteRole(int roleId)
+        public async Task<int> DeleteRoleAsync(int roleId)
         {
             if (roleId < 0)
                 return 0;
@@ -38,9 +38,9 @@
             }
         }
 
-        public Task<IList<MenuView>> GetMenus() => this.ExecuteAsync(db => db.Menus.QueryMenuAsync());
+        public async Task<IEnumerable<MenuView>> GetMenusAsync() => await this.ExecuteAsync(db => db.Menus.QueryMenuAsync());
 
-        public async Task<int> SaveMenu(Menu menu)
+        public async Task<int> SaveMenuAsync(Menu menu)
         {
             if (!menu.IsModelValid())
                 return 0;
@@ -51,7 +51,7 @@
             }
         }
 
-        public async Task<int> DeleteMenu(int menuId)
+        public async Task<int> DeleteMenuAsync(int menuId)
         {
             if (menuId > 0)
             {
@@ -64,7 +64,7 @@
             return 0;
         }
 
-        public async Task<IEnumerable<Menu>> CreateMenu(User user)
+        public async Task<IEnumerable<Menu>> CreateMenuAsync(User user)
         {
             List<Menu> list = new List<Menu>();
 
@@ -104,7 +104,7 @@
 
                         list.AddRange(TreeView(menus, null));
 
-                        List<Menu> tempList = new List<Menu>(list);
+                        var tempList = new List<Menu>(list);
                         foreach (var parent in tempList)
                         {
                             if (parent.Childs.Count == 0)
@@ -117,9 +117,9 @@
             return list;
         }
 
-        public Task<IList<RoleMenuView>> GetRoleMenuViews(int roleId) => this.ExecuteAsync(db => db.RoleMenus.QueryRoleMenuViewByAsync(roleId));
+        public async Task<IEnumerable<RoleMenuView>> GetRoleMenuViewsAsync(int roleId) => await this.ExecuteAsync(db => db.RoleMenus.QueryRoleMenuViewByAsync(roleId));
 
-        public async Task<int> SaveRoleMenu(ApiParameter ap)
+        public async Task<int> SaveRoleMenuAsync(ApiParameter ap)
         {
             int ret = 0;
             if (null != ap && ap.Any())
@@ -158,7 +158,7 @@
             return ret;
         }
 
-        public Task<int> SaveAppUser(AppUser model)
+        public Task<int> SaveAppUserAsync(AppUser model)
         {
             if (model.IsModelValid())
             {
@@ -171,8 +171,7 @@
             return Task.FromResult(0);
         }
 
-
-        public Task<int> DeleteAppUser(int appUserId)
+        public Task<int> DeleteAppUserAsync(int appUserId)
         {
             if (appUserId > 0)
             {
@@ -182,9 +181,8 @@
 
             return Task.FromResult(0);
         }
-        //
 
-        public async Task<IEnumerable<AppSetting>> GetAppSettingList()
+        public async Task<IEnumerable<AppSetting>> GetAppSettingsAsync()
         {
             List<AppSetting> ret = new List<AppSetting>();
 
@@ -209,7 +207,7 @@
             return ret;
         }
 
-        public async Task<int> UpdateAllAppSetting(IEnumerable<AppSetting> appSettingList)
+        public async Task<int> UpdateAllAppSettingsAsync(IEnumerable<AppSetting> appSettingList)
         {
             int ret = 0;
             if (appSettingList.IsModelListValid())
@@ -221,12 +219,44 @@
                     {
                        ret += await db.AppSettings.InsertAsync(appSetting);
                     }
+
                     db.Commit();
                 }
             }
 
             return ret;
         }
+    }
+
+    public interface IAdminPanelService
+    {
+        Task<IEnumerable<Role>> GetRolesAsync();
+
+        Task<IEnumerable<Role>> GetRolesAsNoAdminAsync();
+
+        Task<int> SaveRoleAsync(Role role);
+
+        Task<int> DeleteRoleAsync(int roleId);
+
+        Task<IEnumerable<MenuView>> GetMenusAsync();
+
+        Task<int> SaveMenuAsync(Menu menu);
+
+        Task<int> DeleteMenuAsync(int menuId);
+
+        Task<IEnumerable<Menu>> CreateMenuAsync(User user);
+
+        Task<IEnumerable<RoleMenuView>> GetRoleMenuViewsAsync(int roleId);
+
+        Task<int> SaveRoleMenuAsync(ApiParameter ap);
+
+        Task<int> SaveAppUserAsync(AppUser model);
+
+        Task<int> DeleteAppUserAsync(int appUserId);
+
+        Task<IEnumerable<AppSetting>> GetAppSettingsAsync();
+
+        Task<int> UpdateAllAppSettingsAsync(IEnumerable<AppSetting> appSettingList);
     }
 
     public struct User

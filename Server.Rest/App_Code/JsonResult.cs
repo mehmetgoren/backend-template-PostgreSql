@@ -10,7 +10,6 @@
         public DefaultJsonResult(object value)
             : base(value, DefaultJsonSerializerSettings)
         {
-            
         }
     }
 }

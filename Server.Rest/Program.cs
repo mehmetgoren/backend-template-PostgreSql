@@ -7,22 +7,16 @@
     using System.IO;
     using ionix.Data.PostgreSql;
 
-
     public static class Program
     {
         public static void Main(string[] args)
         {
-            //ionixFactory.OnLogSqlScript = LogSqlScript;
+            OnStartup.Instance.LogSqlScript(LogSqlScript);
             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.UseKestrel(options =>
-                //{
-                //    var ipAddress = IPAddress.Parse("127.0.0.1");
-                //    options.Listen(ipAddress, 5000);
-                //})
                 .UseUrls(DataSources.Jsons.AppSettings.Server.Address)
                 .UseStartup<Startup>()
                 .Build();

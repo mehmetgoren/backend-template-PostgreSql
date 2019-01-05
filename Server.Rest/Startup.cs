@@ -1,6 +1,7 @@
 ﻿namespace Server.Rest
 {
     using System;
+    using System.Reflection;
     using ionix.Rest;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -40,10 +41,10 @@
 
             services.AddSingleton<IUtilsService, UtilsService>();
             services.AddSingleton<IAuthService, AuthService>();
+            services.AddSingleton<IAdminPanelService, AdminPanelService>();
+            services.AddSingleton<IUnauthorizedService, UnauthorizedService>();
 
-            //*services.AddSingleton<ServerMonitoringHubImpl, ServerMonitoringHubImpl>();
-
-            //*services.AddScoped<Lazy<DbContext>, Lazy<DbContext>>((sp) => new Lazy<DbContext>(ionixFactory.CreateDbContext, true));//Bu Yapıda Gereksiz DbConetx ve connection nesnesi oluşturuluyor
+            services.AddSingleton<ServerMonitoringHubImpl, ServerMonitoringHubImpl>();
 
             services.AddSignalR(options =>
             {
@@ -65,8 +66,8 @@
                 app.UseDeveloperExceptionPage();
             }
 
-            //*if (Config.WebApiAuthEnabled)
-               //* app.UseTokenTableAuthentication(TokenTable.Instance, AuthorizationValidator.Instance);
+            if (Config.WebApiAuthEnabled)
+                app.UseTokenTableAuthentication(TokenTable.Instance, AuthorizationValidator.Instance);
 
             app.UseCors(builder =>
             {
@@ -77,26 +78,15 @@
                     .AllowCredentials();
             });
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute("default", "api/{controller}/{action}/{id?}");
-            //});
-
             app.UseMvc();
 
             //signalr
             app.UseSignalR(routes =>
             {
-                //*routes.MapHubs(Assembly.GetExecutingAssembly());
+                routes.MapHubs(Assembly.GetExecutingAssembly());
                 //routes.MapHub<ServerMonitoringHub>("/servermonitoring");
                 //routes.MapHub<ImagesHub>("/images");
             });
-
-
-            //app.Use(async (context, next) =>
-            //{
-            //    await context.Response.WriteAsync("Hi From Aps.Net Core");
-            //});
         }
 
 
@@ -104,6 +94,5 @@
         {
            // ServerMonitoringService.Instance.Start();
         }
-
     }
 }
