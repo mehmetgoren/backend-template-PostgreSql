@@ -14,6 +14,6 @@
         {
         }
 
-        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
+        protected override IEnumerable<Type> GetEntityTypes() => Assembly.GetExecutingAssembly().GetTypes();
     }
 }
