@@ -259,7 +259,8 @@
         Task<int> UpdateAllAppSettingsAsync(IEnumerable<AppSetting> appSettingList);
     }
 
-    public struct User
+    //struct olursa CopyPropertiesFrom da hata veriyor.
+    public sealed class User
     {
         public string Name { get; set; }
         public string Password { get; set; }

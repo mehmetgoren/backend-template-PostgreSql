@@ -13,7 +13,7 @@
             => this.UnauthorizedService = unauthorizedService ?? throw new ArgumentNullException(nameof(unauthorizedService));
 
         [HttpPost]
-        public Task<IActionResult> Login([FromBody] Credentials credentials)
+        public Task<IActionResult> Login(Credentials credentials)
             => this.ResultSingleAsync(() => this.UnauthorizedService.LoginAsync(credentials.MapTo<Server.Credentials>(), () => TokenTable.Instance.Login(credentials)));
 
         [HttpGet]

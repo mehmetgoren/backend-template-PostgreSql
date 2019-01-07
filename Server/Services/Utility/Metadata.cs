@@ -13,7 +13,7 @@
 
     public static class Metadata
     {
-        private static readonly string ModelsAssemblyName = Assembly.GetExecutingAssembly().FullName.Split('.')[0] + ".Models";// "Server.Models";
+        private static readonly string ModelsAssemblyName = $"{nameof(Server)}.{nameof(Models)}";// Assembly.GetExecutingAssembly().FullName+ ".Models";// "Server.Models";
         private static readonly Assembly ModelAssembly = GetAssembly(ModelsAssemblyName);
 
         private static Assembly GetAssembly(string asmName)

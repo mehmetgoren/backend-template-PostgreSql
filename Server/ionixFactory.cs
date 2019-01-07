@@ -10,6 +10,8 @@
     using ionix.Utils.Extensions;
     using ionix.Data.PostgreSql.BulkCopy;
     using Npgsql;
+    using System.Reflection;
+    using System.Globalization;
 
     internal static class ionixFactory
     {
@@ -86,8 +88,11 @@
         internal static TRepository CreateRepository<TRepository>(IDbAccess dataAccess)
             where TRepository : IDisposable
         {
+            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+            CultureInfo culture = CultureInfo.InvariantCulture;
+
             var cmd = CreateCommand(dataAccess);
-            return (TRepository)Activator.CreateInstance(typeof(TRepository), cmd);
+            return (TRepository)Activator.CreateInstance(typeof(TRepository), flags, (Binder)null, new object[] { cmd }, culture);
         }
 
         internal static IEntityMetaDataProvider CreateEntityMetaDataProvider()

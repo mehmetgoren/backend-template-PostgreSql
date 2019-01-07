@@ -117,7 +117,7 @@
 
 
         public static IEnumerable<T> MapListTo<T>(this IEnumerable sourceList)
-            where T:new()
+            where T : class, new()
         {
             List<T> ret = new List<T>();
             if (null != sourceList)
@@ -133,7 +133,7 @@
         }
 
         public static T MapTo<T>(this object source)
-             where T : new()
+             where T : class, new()
         {
             if (null != source)
             {

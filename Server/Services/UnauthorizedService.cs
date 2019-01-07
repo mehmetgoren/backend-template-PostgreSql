@@ -14,7 +14,7 @@
         {
             StackTrace stackTrace = new StackTrace();
             UserLocal ret = null;
-            if (String.IsNullOrEmpty(credentials.Username) && !String.IsNullOrEmpty(credentials.Password) && null != createTokenFn)
+            if (!String.IsNullOrEmpty(credentials.Username) && !String.IsNullOrEmpty(credentials.Password) && null != createTokenFn)
             {
                 using (var db = ionixFactory.CreateDbContext())
                 {
@@ -126,7 +126,8 @@
         IEnumerable<Menu> MenuListAsTree();
     }
 
-    public struct Credentials
+    //struct olursa CopyPropertiesFrom da parametre olduğu için hata veriyor.
+    public sealed class Credentials
     {
         public string Username { get; set; }
         public string Password { get; set; }
