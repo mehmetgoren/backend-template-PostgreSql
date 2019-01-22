@@ -55,7 +55,7 @@
 
 
         [HttpPost]//Reflection verileri ile oluşan ekrandan db aktarılacak veriler.
-        public IActionResult SaveActionRoles([FromBody]SaveRoleActionsModel par)
+        public IActionResult SaveActionRoles(SaveRoleActionsModel par)
         {
             return this.ResultSingle(() =>
             {

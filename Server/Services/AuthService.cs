@@ -187,9 +187,9 @@
 
     public sealed class RoleControllerActionEntity
     {
-        public string RoleName { get; }
-        public string ControllerName { get; }
-        public string ActionName { get; }
-        public bool Enabled { get; set; }
+        public string RoleName { get; set; }
+        public string ControllerName { get; set; }
+        public string ActionName { get; set; }
+        public bool Enabled { get; set;  }
     }
 }

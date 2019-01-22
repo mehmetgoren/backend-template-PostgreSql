@@ -20,7 +20,7 @@
 
         //Örneğin İki Tarih Arası İStenirse bunu bir attribute ile meta dataya göm ve sayı tarih vb tüm alanlar için Kullan.
         [HttpPost]
-        public IActionResult Search([FromBody] SearchParams searchParams)
+        public IActionResult Search(SearchParams searchParams)
         {
             SearchResult result = default;
             return this.ResultList(() =>
@@ -31,7 +31,7 @@
         }
 
         [HttpPost]
-        public IActionResult GetMetaData([FromBody] HashSet<string> typeFullNameList)
+        public IActionResult GetMetaData(HashSet<string> typeFullNameList)
             => this.ResultList(() => this.UtilsService.GetMetaData(typeFullNameList));
 
         [HttpGet]

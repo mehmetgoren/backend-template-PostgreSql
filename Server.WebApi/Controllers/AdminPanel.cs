@@ -14,6 +14,7 @@
     {
         private IAdminPanelService AdminPanelService { get; }
 
+       // Api manegment da buralkar gelmiyor.
         public AdminPanelController(IAdminPanelService adminPanelService)
             => this.AdminPanelService = adminPanelService ?? throw new ArgumentNullException(nameof(adminPanelService));
 
@@ -26,7 +27,7 @@
             => this.ResultListAsync(this.AdminPanelService.GetRolesAsNoAdminAsync);
 
         [HttpPost]
-        public Task<IActionResult> SaveRole([FromBody] Role role)
+        public Task<IActionResult> SaveRole(Role role)
         {
             if (!role.IsModelValid())
                 return this.ResultAsMessageAsync("Validation has been failed.");
@@ -48,7 +49,7 @@
             => this.ResultListAsync(this.AdminPanelService.GetMenusAsync);
 
         [HttpPost]
-        public Task<IActionResult> SaveMenu([FromBody] Menu menu)
+        public Task<IActionResult> SaveMenu(Menu menu)
         {
             if (!this.IsModelValid(menu))
                 return this.ResultAsMessageAsync("Validation has been failed.");
@@ -91,7 +92,7 @@
         }
 
         [HttpPost]
-        public Task<IActionResult> SaveRoleMenu([FromBody] ApiParameter ap)
+        public Task<IActionResult> SaveRoleMenu(ApiParameter ap)
         {
             if (ap == null)
                 return this.ResultAsMessageAsync("Validation has been failed.");
@@ -101,7 +102,7 @@
 
 
         [HttpPost]
-        public Task<IActionResult> SaveAppUser([FromBody] AppUser model)
+        public Task<IActionResult> SaveAppUser(AppUser model)
         {
             if (!this.IsModelValid(model))
                 return this.ResultAsMessageAsync("Validation has been failed.");
@@ -129,7 +130,7 @@
             => this.ResultListAsync(this.AdminPanelService.GetAppSettingsAsync);
 
         [HttpPost]
-        public Task<IActionResult> UpdateAllAppSetting([FromBody] IEnumerable<AppSetting> appSettingList)
+        public Task<IActionResult> UpdateAllAppSetting(IEnumerable<AppSetting> appSettingList)
         {
             if (!this.IsModelValid(appSettingList))
                 return this.ResultAsMessageAsync("Validation has been failed.");

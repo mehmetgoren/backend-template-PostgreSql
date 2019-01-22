@@ -126,6 +126,8 @@
                 {
                     T dest = new T();
                     dest.CopyPropertiesFrom(source);
+
+                    ret.Add(dest);
                 }
             } 
 

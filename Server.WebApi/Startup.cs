@@ -72,9 +72,9 @@
             app.UseCors(builder =>
             {
                 builder
-                    .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
+                    .WithOrigins("http://192.168.0.21:51")
                     .AllowCredentials();
             });
 
