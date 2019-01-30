@@ -75,6 +75,7 @@
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .WithOrigins("http://192.168.0.21:51")
+                    //.AllowAnyOrigin()
                     .AllowCredentials();
             });
 

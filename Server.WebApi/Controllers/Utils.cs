@@ -31,7 +31,7 @@
         }
 
         [HttpPost]
-        public IActionResult GetMetaData(HashSet<string> typeFullNameList)
+        public IActionResult GetMetaData([FromBody] HashSet<string> typeFullNameList)
             => this.ResultList(() => this.UtilsService.GetMetaData(typeFullNameList));
 
         [HttpGet]

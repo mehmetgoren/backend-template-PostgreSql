@@ -115,6 +115,37 @@
             }
             return list;
         }
+
+        public async Task<int> InsertDumbData()
+        {
+            //List<Role> list = new List<Role>();
+            //for (int j = 0; j < 10000; ++j)
+            //{
+            //    Role r = new Role { Name = Guid.NewGuid().ToString() };
+            //    list.Add(r);
+            //}
+
+            //int result = 0;
+            //using (var db = ionixFactory.CreateDbContext())
+            //{
+            //    result = await db.Roles.BatchInsertAsync(list);
+            //}
+
+            List<AppUser> list = new List<AppUser>();
+            for (int j = 0; j < 10000; ++j)
+            {
+                AppUser r = new AppUser { Username = Guid.NewGuid().ToString(), RoleId = 2 };
+                list.Add(r);
+            }
+
+            int result = 0;
+            using (var db = ionixFactory.CreateDbContext())
+            {
+                result = await db.AppUsers.BatchInsertAsync(list);
+            }
+
+            return result;
+        }
     }
 
     public interface IUnauthorizedService
@@ -124,6 +155,8 @@
         IList<AppSetting> GetAppSettingList();
 
         IEnumerable<Menu> MenuListAsTree();
+
+        Task<int> InsertDumbData();
     }
 
     //struct olursa CopyPropertiesFrom da parametre olduğu için hata veriyor.
