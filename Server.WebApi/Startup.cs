@@ -37,7 +37,7 @@
         {
             services.AddMvc(opt =>
             {
-                
+
             });
 
             services.AddSingleton<IUtilsService, UtilsService>();
@@ -75,7 +75,7 @@
                 builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .WithOrigins("http://192.168.0.21:51")
+                    .WithOrigins("http://192.168.0.10:51", "http://192.168.0.10:31")
                     //.AllowAnyOrigin()
                     .AllowCredentials();
             });
@@ -94,7 +94,7 @@
 
         private static void StartNanoServices()
         {
-           // ServerMonitoringService.Instance.Start();
+            // ServerMonitoringService.Instance.Start();
         }
     }
 }

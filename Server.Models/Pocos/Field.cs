@@ -17,6 +17,9 @@
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ValidationType ValidationType { get; set; }
+
+        public override string ToString()
+            => JsonConvert.SerializeObject(this);
     }
 
     public enum ValidationType
