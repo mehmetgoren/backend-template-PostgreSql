@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

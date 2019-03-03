@@ -7,6 +7,7 @@
     using Models;
     using ionix.Data;
     using System.Threading.Tasks;
+    using Server.Application;
 
     //i believe service layer should be thin as mush as posible. Therefore i implement this controller as a proxy.
     [TokenTableAuth]
@@ -73,9 +74,9 @@
                 return this.ResultAsMessage("Validation has been failed.");
 
             var responseModel = new ResponseModel<Menu>();
-            if (TokenTable.Instance.TryAuthenticateToken(token, out User user))
+            if (TokenTable.Instance.TryAuthenticateToken(token, out ionix.Rest.User user))
             {
-               await responseModel.DataAsync(() => this.AdminPanelService.CreateMenuAsync(user.MapTo<Server.User>()));
+               await responseModel.DataAsync(() => this.AdminPanelService.CreateMenuAsync(user.MapTo<Server.Application.User>()));
             }
 
             return responseModel.AsJsonResult();

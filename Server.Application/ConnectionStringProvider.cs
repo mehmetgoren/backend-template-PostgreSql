@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     public enum DB
     {

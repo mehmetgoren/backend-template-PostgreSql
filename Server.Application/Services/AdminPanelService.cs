@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     using Server.Models;
     using System;

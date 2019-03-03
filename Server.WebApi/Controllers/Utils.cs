@@ -9,6 +9,7 @@
     using ionix.Utils.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Models;
+    using Server.Application;
 
     [TokenTableAuth]
     public class UtilsController : ApiController
@@ -59,7 +60,7 @@
 
         [HttpGet]//TokenTable.Instance.GetCurrentUserList();
         public Task<IActionResult> GetConnectedUsers()
-            => this.ResultListAsync(() => this.UtilsService.GetConnectedUsersAsync(() => TokenTable.Instance.GetCurrentUserList().MapListTo<Server.User>()));
+            => this.ResultListAsync(() => this.UtilsService.GetConnectedUsersAsync(() => TokenTable.Instance.GetCurrentUserList().MapListTo<Server.Application.User>()));
 
         [HttpGet]
         public IActionResult GetLanguageDictionary()

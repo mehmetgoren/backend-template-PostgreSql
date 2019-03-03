@@ -6,6 +6,7 @@
     using System;
     using System.IO;
     using ionix.Data.PostgreSql;
+    using Server.Application;
 
     public static class Program
     {

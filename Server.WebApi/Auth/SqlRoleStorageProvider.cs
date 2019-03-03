@@ -8,6 +8,7 @@
     using Server.Models;
     using Server;
     using Microsoft.Extensions.DependencyInjection;
+    using Server.Application;
 
     //for postgres
     public sealed class SqlRoleStorageProvider : IRoleStorageProvider
@@ -43,7 +44,7 @@
         // RadioButton button List< çalışmıyor.> 
         //Reflection ile gelen ekrandan oluşan verilerin db ye yansıltılması.
         public int Save(IEnumerable<ionix.Rest.RoleControllerActionEntity> list)
-            => this.AuthService.SaveRoleControllerAction(list.MapListTo<Server.RoleControllerActionEntity>());
+            => this.AuthService.SaveRoleControllerAction(list.MapListTo<Server.Application.RoleControllerActionEntity>());
 
         public int ClearNonExistRecords()
         {

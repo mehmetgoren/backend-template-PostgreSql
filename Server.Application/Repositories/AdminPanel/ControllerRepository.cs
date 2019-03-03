@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     using ionix.Data;
     using System;

@@ -9,6 +9,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Serialization;
+    using Server.Application;
 
     public class Startup
     {

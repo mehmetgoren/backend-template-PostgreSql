@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     using ionix.Utils.Extensions;
     using Server.Models;

@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Server.Application
 {
     using System.Linq;
     using System.Diagnostics;

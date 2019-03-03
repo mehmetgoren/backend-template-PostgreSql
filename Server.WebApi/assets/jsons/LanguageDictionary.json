@@ -22,5 +22,9 @@
   "closeAll": {
     "en": "Close All",
     "tr": "Hepsini Kapat"
+  },
+  "loading": {
+    "en": "Loading",
+    "tr": "Yükleniyor"
   }
 }

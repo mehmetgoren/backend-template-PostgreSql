@@ -7,6 +7,7 @@
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using ionix.Rest;
+    using Server.Application;
 
     [TokenTableAuth]
     public sealed class ServerMonitoringHub : BaseHub

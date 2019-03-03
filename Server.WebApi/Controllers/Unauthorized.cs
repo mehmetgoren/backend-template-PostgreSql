@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using ionix.Rest;
     using Microsoft.AspNetCore.Mvc;
+    using Server.Application;
 
     //This controller is not authorized
     public class UnauthorizedController : ApiController
@@ -13,8 +14,8 @@
             => this.UnauthorizedService = unauthorizedService ?? throw new ArgumentNullException(nameof(unauthorizedService));
 
         [HttpPost]
-        public Task<IActionResult> Login([FromBody]Credentials credentials)
-            => this.ResultSingleAsync(() => this.UnauthorizedService.LoginAsync(credentials.MapTo<Server.Credentials>(), () => TokenTable.Instance.Login(credentials)));
+        public Task<IActionResult> Login([FromBody]ionix.Rest.Credentials credentials)
+            => this.ResultSingleAsync(() => this.UnauthorizedService.LoginAsync(credentials.MapTo<Server.Application.Credentials>(), () => TokenTable.Instance.Login(credentials)));
 
         [HttpGet]
         public IActionResult Logout(Guid token)
