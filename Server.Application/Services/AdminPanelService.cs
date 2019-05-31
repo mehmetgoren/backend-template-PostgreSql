@@ -184,12 +184,9 @@
 
         public async Task<IEnumerable<AppSetting>> GetAppSettingsAsync()
         {
-            List<AppSetting> ret = new List<AppSetting>();
-
             HashSet<string> hash = new HashSet<string>();
-            var props = typeof(Config).GetProperties(BindingFlags.Public | BindingFlags.Static);
-
-            props.ForEach(p => hash.Add(p.Name));
+            typeof(Config).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                .ForEach(p => hash.Add(p.Name));
 
             IList<AppSetting> dbList = (await this.ExecuteAsync(db => db.AppSettings.SelectAsync())).OrderBy(p => p.Name).ToList();
 
@@ -197,14 +194,10 @@
             {
                 var setting = dbList.FirstOrDefault(p => p.Name == name);
                 if (null == setting)
-                {
-                    setting = new AppSetting() { Name = name };
-                }
-
-                ret.Add(setting);
+                    throw new KeyNotFoundException($"{name} was not found in database {nameof(AppSetting)} records.");
             }
 
-            return ret;
+            return dbList;
         }
 
         public async Task<int> UpdateAllAppSettingsAsync(IEnumerable<AppSetting> appSettingList)

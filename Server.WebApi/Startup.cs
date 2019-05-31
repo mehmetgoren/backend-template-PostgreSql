@@ -75,7 +75,7 @@
                 builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .WithOrigins("http://192.168.0.10:51", "http://192.168.0.10:31")
+                    .WithOrigins("http://192.168.0.15:51", "http://192.168.0.15:31")
                     //.AllowAnyOrigin()
                     .AllowCredentials();
             });

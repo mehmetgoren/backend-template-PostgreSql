@@ -93,7 +93,7 @@
         }
 
         [HttpPost]
-        public Task<IActionResult> SaveRoleMenu(ApiParameter ap)
+        public Task<IActionResult> SaveRoleMenu([FromBody]ApiParameter ap)
         {
             if (ap == null)
                 return this.ResultAsMessageAsync("Validation has been failed.");
