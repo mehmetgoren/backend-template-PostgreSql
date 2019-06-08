@@ -27,7 +27,7 @@
             return this.ResultList(() =>
             {
                 result = this.UtilsService.Search(searchParams);
-                return result.EntityList;
+                return result.EntityList; 
             }, () => result.Total);
         }
 
